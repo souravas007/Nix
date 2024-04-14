@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -56,10 +56,10 @@
   # Remove gnome bloatware
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
+    gedit
   ]) ++ (with pkgs.gnome; [
     cheese      # photo booth
     epiphany    # web browser
-    gedit       # text editor
     simple-scan # document scanner
     totem       # video player
     yelp        # help viewer
@@ -77,10 +77,11 @@
 
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -166,10 +167,8 @@
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-powerlevel10k
-    fira-code-nerdfont
-    
-    # Unstable Channel
-    # anytype
+    fira-code-nerdfont    
+    anytype
     # postman
 
     # Gnome Themes
